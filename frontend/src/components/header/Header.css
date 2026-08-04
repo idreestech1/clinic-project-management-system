@@ -1,0 +1,327 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700&display=swap');
+
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  z-index: 50;
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 24px rgba(0, 97, 164, 0.06);
+}
+
+.navbar__inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 72px;
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 32px;
+  gap: 32px;
+  position: relative;
+}
+
+.navbar__logo {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: #1a6fd4;
+  letter-spacing: -0.02em;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.navbar__links {
+  display: flex;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  gap: 36px;
+  flex: 1;
+  justify-content: center;
+}
+
+.navbar__link {
+  position: relative;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  text-decoration: none;
+  padding-bottom: 4px;
+  transition: color 0.2s ease;
+  white-space: nowrap;
+}
+
+.navbar__link:hover {
+  color: #1a6fd4;
+}
+
+.navbar__link--active {
+  color: #1a6fd4;
+  font-weight: 600;
+}
+
+.navbar__link-underline {
+  position: absolute;
+  bottom: -4px;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: #1a6fd4;
+  border-radius: 2px;
+}
+
+.navbar__actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.navbar__mobile-controls {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex-shrink: 0;
+}
+
+.navbar__hamburger {
+  display: none;
+  width: 42px;
+  height: 42px;
+  border: 1px solid rgba(26, 111, 212, 0.2);
+  border-radius: 10px;
+  background: #ffffff;
+  padding: 0;
+  cursor: pointer;
+  align-items: center;
+  justify-content: center;
+  gap: 4px;
+  flex-direction: column;
+}
+
+.navbar__hamburger span {
+  display: block;
+  width: 18px;
+  height: 2px;
+  background: #1a6fd4;
+  border-radius: 999px;
+  transition: transform 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar__hamburger--open span:nth-child(1) {
+  transform: translateY(6px) rotate(45deg);
+}
+
+.navbar__hamburger--open span:nth-child(2) {
+  opacity: 0;
+}
+
+.navbar__hamburger--open span:nth-child(3) {
+  transform: translateY(-6px) rotate(-45deg);
+}
+
+.navbar__login {
+  background: transparent;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: color 0.2s ease, background 0.2s ease;
+}
+
+.navbar__login:hover {
+  color: #1a6fd4;
+  background: rgba(26, 111, 212, 0.06);
+}
+
+.navbar__book {
+  background: #1a6fd4;
+  color: #ffffff;
+  border: none;
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.95rem;
+  font-weight: 700;
+  padding: 10px 24px;
+  border-radius: 999px;
+  cursor: pointer;
+  box-shadow: 0 4px 16px rgba(26, 111, 212, 0.30);
+  transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+}
+
+.navbar__signin {
+  background: #ffffff;
+  color: #1a6fd4;
+  border: 1px solid rgba(26, 111, 212, 0.35);
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 9px 16px;
+  border-radius: 999px;
+  cursor: pointer;
+}
+
+.navbar__signin:hover {
+  background: #eef5fc;
+}
+
+.navbar__book:hover {
+  background: #155bbf;
+  box-shadow: 0 6px 20px rgba(26, 111, 212, 0.40);
+}
+
+.navbar__book:active {
+  transform: scale(0.96);
+}
+
+.navbar__mobile-overlay,
+.navbar__mobile-panel {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .navbar__inner {
+    height: auto;
+    min-height: 72px;
+    padding: 8px 16px;
+    gap: 12px;
+  }
+
+  .navbar__hamburger {
+    display: inline-flex;
+  }
+
+  .navbar__links {
+    display: none;
+  }
+
+  .navbar__mobile-controls {
+    margin-left: auto;
+  }
+
+  .navbar__actions {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 6px;
+  }
+
+  .navbar__login,
+  .navbar__signin,
+  .navbar__book {
+    padding: 6px 12px;
+    font-size: 0.76rem;
+    line-height: 1.2;
+    text-align: center;
+    white-space: nowrap;
+  }
+
+  .navbar__mobile-overlay {
+    display: block;
+    position: fixed;
+    inset: 0;
+    background: rgba(9, 19, 32, 0.38);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.25s ease;
+    z-index: 60;
+  }
+
+  .navbar__mobile-overlay--open {
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .navbar__mobile-panel {
+    display: block;
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    width: min(82vw, 320px);
+    background: #ffffff;
+    border-left: 1px solid rgba(0, 0, 0, 0.08);
+    box-shadow: -10px 0 30px rgba(0, 0, 0, 0.12);
+    transform: translateX(100%);
+    transition: transform 0.3s ease;
+    z-index: 70;
+    padding: 86px 18px 24px;
+  }
+
+  .navbar__mobile-panel--open {
+    transform: translateX(0);
+  }
+
+  .navbar__mobile-close {
+    position: absolute;
+    top: 16px;
+    right: 14px;
+    width: 36px;
+    height: 36px;
+    border: 1px solid rgba(0, 0, 0, 0.12);
+    border-radius: 10px;
+    background: #ffffff;
+    color: #1a3348;
+    font-size: 1.2rem;
+    line-height: 1;
+    cursor: pointer;
+  }
+
+  .navbar__mobile-links {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+
+  .navbar__mobile-link {
+    display: block;
+    text-decoration: none;
+    color: #233444;
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    font-size: 1rem;
+    font-weight: 600;
+    border-radius: 10px;
+    padding: 12px 10px;
+    transition: background 0.2s ease, color 0.2s ease;
+  }
+
+  .navbar__mobile-link:hover {
+    background: #eef5fc;
+    color: #1a6fd4;
+  }
+
+  .navbar__mobile-link--active {
+    color: #1a6fd4;
+    background: #eef5fc;
+  }
+}
+
+@media (max-width: 420px) {
+  .navbar__logo {
+    font-size: 1.12rem;
+  }
+
+  .navbar__mobile-controls {
+    gap: 8px;
+  }
+
+  .navbar__login,
+  .navbar__signin,
+  .navbar__book {
+    padding: 6px 10px;
+    font-size: 0.72rem;
+  }
+}

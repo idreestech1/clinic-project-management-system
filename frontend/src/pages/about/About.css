@@ -1,0 +1,461 @@
+@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;600;700;800;900&family=Manrope:wght@400;500;600;700&display=swap');
+
+.about-page {
+  background: #E6E8EA;
+  color: #ffffff;
+  font-family: 'Manrope', sans-serif;
+  min-height: 100vh;
+  padding: 0 32px 100px;
+  margin-top: 40px;
+}
+
+/* ─────────────────────────────────────────
+   BIO
+───────────────────────────────────────── */
+.about-bio {
+  display: grid;
+  grid-template-columns: 340px 1fr;
+  gap: 56px;
+  align-items: center;
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 72px 0 80px;
+}
+
+.about-bio__image-wrap {
+  border-radius: 20px;
+  overflow: hidden;
+  flex-shrink: 0;
+}
+
+.about-bio__image {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
+  border-radius: 20px;
+}
+
+.about-bio__label {
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  color: #3a7bd5;
+  text-transform: uppercase;
+  margin-bottom: 20px;
+}
+
+.about-bio__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(2rem, 4vw, 3rem);
+  font-weight: 900;
+  color: #8a9aaa;
+  line-height: 1.15;
+  margin-bottom: 24px;
+  letter-spacing: -0.02em;
+}
+
+.about-bio__title--blue {
+  color: #1a80e5;
+}
+
+.about-bio__desc {
+  font-size: 0.88rem;
+  color: #5a6a7a;
+  line-height: 1.75;
+  margin-bottom: 12px;
+  max-width: 520px;
+}
+
+.about-bio__badges {
+  display: flex;
+  gap: 16px;
+  margin-top: 32px;
+  flex-wrap: wrap;
+}
+
+.about-badge {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  background: #111418;
+  border: 1px solid #1e2830;
+  border-radius: 14px;
+  padding: 14px 20px;
+  min-width: 180px;
+}
+
+.about-badge__icon {
+  font-size: 1.3rem;
+}
+
+.about-badge__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin: 0 0 2px;
+}
+
+.about-badge__sub {
+  font-size: 0.75rem;
+  color: #5a6a7a;
+  margin: 0;
+}
+
+/* ─────────────────────────────────────────
+   EXPERTISE
+───────────────────────────────────────── */
+.about-expertise {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 0 80px;
+}
+
+.about-expertise__header {
+  margin-bottom: 24px;
+}
+
+.about-expertise__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.2rem;
+  font-weight: 700;
+  color: #6a7a8a;
+  margin-bottom: 6px;
+}
+
+.about-expertise__sub {
+  font-size: 0.83rem;
+  color: #3a4a5a;
+  line-height: 1.6;
+  max-width: 320px;
+}
+
+.about-divider {
+  border: none;
+  border-top: 1px solid #1e2830;
+  margin-bottom: 32px;
+}
+
+.about-expertise__grid {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 20px;
+}
+
+/* Education card */
+.about-edu-card {
+  background: #ffffff;
+  border-radius: 20px;
+  padding: 32px 28px;
+  color: #0a0a0a;
+}
+
+.about-edu-card__header {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 28px;
+}
+
+.about-edu-card__icon {
+  font-size: 1.3rem;
+}
+
+.about-edu-card__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0d1117;
+  margin: 0;
+}
+
+.about-edu-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  padding: 16px 0;
+  border-top: 1px solid #f0f2f4;
+  gap: 16px;
+}
+
+.about-edu-item__degree {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  color: #0d1117;
+  margin: 0 0 4px;
+}
+
+.about-edu-item__school {
+  font-size: 0.8rem;
+  color: #6b7a8a;
+  margin: 0;
+}
+
+.about-edu-item__badge {
+  background: #e8f0fc;
+  color: #1a6fd4;
+  font-size: 0.75rem;
+  font-weight: 700;
+  padding: 4px 12px;
+  border-radius: 999px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Certifications card */
+.about-cert-card {
+  background: #1a6fd4;
+  border-radius: 20px;
+  padding: 32px 28px;
+  color: #ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.about-cert-card__icon-wrap {
+  width: 44px;
+  height: 44px;
+  background: rgba(255,255,255,0.15);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+}
+
+.about-cert-card__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: #ffffff;
+  margin-bottom: 20px;
+}
+
+.about-cert-list {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 auto;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+}
+
+.about-cert-list li {
+  font-size: 0.85rem;
+  color: rgba(255,255,255,0.88);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.about-cert-list li::before {
+  content: '✓';
+  color: #90d0ff;
+  font-weight: 700;
+  font-size: 0.9rem;
+}
+
+.about-cert-renewed {
+  font-size: 0.75rem;
+  color: rgba(255,255,255,0.5);
+  margin-top: 20px;
+}
+
+/* ─────────────────────────────────────────
+   TIMELINE
+───────────────────────────────────────── */
+.about-timeline {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 20px 0 80px;
+  text-align: center;
+}
+
+.about-timeline__title {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: clamp(1.8rem, 4vw, 2.8rem);
+  font-weight: 900;
+  color: #6a7a8a;
+  margin-bottom: 12px;
+  letter-spacing: -0.02em;
+}
+
+.about-timeline__bar {
+  width: 48px;
+  height: 3px;
+  background: #1a6fd4;
+  border-radius: 2px;
+  margin: 0 auto 48px;
+}
+
+.about-timeline__list {
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+  position: relative;
+}
+
+/* Vertical line */
+.about-timeline__list::before {
+  content: '';
+  position: absolute;
+  left: 50%;
+  top: 0;
+  bottom: 0;
+  width: 2px;
+  background: #1e2830;
+  transform: translateX(-50%);
+  z-index: 0;
+}
+
+.about-milestone {
+  display: grid;
+  grid-template-columns: 1fr 48px 1fr;
+  align-items: center;
+  gap: 24px;
+  position: relative;
+  z-index: 1;
+}
+
+.about-milestone__text {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.about-milestone__text--left {
+  text-align: right;
+}
+
+.about-milestone__text--right {
+  text-align: left;
+}
+
+.about-milestone__period {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: #1a80e5;
+  margin: 0;
+}
+
+.about-milestone__label {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #6a7a8a;
+  margin: 0;
+}
+
+.about-milestone__desc {
+  font-size: 0.8rem;
+  color: #4a5a6a;
+  line-height: 1.6;
+  margin: 0;
+}
+
+.about-milestone__node {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+  flex-shrink: 0;
+  z-index: 2;
+  box-shadow: 0 0 0 6px #0a0a0a;
+}
+
+/* ─────────────────────────────────────────
+   PHILOSOPHY
+───────────────────────────────────────── */
+.about-philosophy {
+  max-width: 1100px;
+  margin: 0 auto;
+}
+
+.about-philosophy__card {
+  background: #f4f6f8;
+  border-radius: 24px;
+  padding: 48px 52px;
+  position: relative;
+  overflow: hidden;
+  color: #0a0a0a;
+}
+
+.about-philosophy__quotes {
+  position: absolute;
+  top: 16px;
+  right: 32px;
+  font-size: 8rem;
+  line-height: 1;
+  color: #e0e8f0;
+  font-family: Georgia, serif;
+  pointer-events: none;
+  user-select: none;
+}
+
+.about-philosophy__heading {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: #0d1117;
+  margin-bottom: 20px;
+}
+
+.about-philosophy__quote {
+  font-size: 1.05rem;
+  line-height: 1.75;
+  color: #2a3a4a;
+  max-width: 520px;
+  margin-bottom: 28px;
+}
+
+.about-philosophy__attribution {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+}
+
+.about-philosophy__line {
+  display: inline-block;
+  width: 40px;
+  height: 3px;
+  background: #1a6fd4;
+  border-radius: 2px;
+  flex-shrink: 0;
+}
+
+.about-philosophy__name {
+  font-family: 'Plus Jakarta Sans', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 800;
+  letter-spacing: 0.12em;
+  color: #1a6fd4;
+  text-transform: uppercase;
+}
+
+@media (max-width: 768px) {
+  .about-bio {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+  .about-bio__image {
+    height: 280px;
+  }
+  .about-expertise__grid {
+    grid-template-columns: 1fr;
+  }
+  .about-milestone {
+    grid-template-columns: 1fr 40px 1fr;
+    gap: 12px;
+  }
+  .about-philosophy__card {
+    padding: 32px 24px;
+  }
+}
