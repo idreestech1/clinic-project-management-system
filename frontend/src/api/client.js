@@ -1,4 +1,4 @@
-const API_BASE_URL = (import.meta.env.VITE_API_URL+"/api" || "/api").replace(/\/$/, "");
+const API_BASE_URL = (import.meta.env.VITE_API_URL+"api" || "/api").replace(/\/$/, "");
 
 export const apiRequest = async (path, options = {}) => {
   const response = await fetch(`${API_BASE_URL}${path}`, {
