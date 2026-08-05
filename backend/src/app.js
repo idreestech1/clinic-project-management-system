@@ -39,29 +39,8 @@ const isLoopbackOrigin = (origin) => {
   }
 };
 
-app.use(
-  cors({
-    origin(origin, callback) {
-      if (!origin) {
-        callback(null, true);
-        return;
-      }
+app.use(cors())
 
-      if (
-        configuredOrigins.includes(origin) ||
-        (process.env.NODE_ENV !== "production" && isLoopbackOrigin(origin))
-      ) {
-        callback(null, true);
-        return;
-      }
-
-      callback(new Error("Not allowed by CORS"));
-    },
-    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
-    credentials: true,
-    allowedHeaders: ["Content-Type", "Authorization"],
-  })
-);
 
 app.use(express.json());
 

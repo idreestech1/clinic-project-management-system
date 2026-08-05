@@ -7,6 +7,7 @@ import { seedDatabase } from "./config/seed.js";
 const port = Number(process.env.PORT) || 5000;
 const host = process.env.HOST || "0.0.0.0";
 
+
 const startServer = async () => {
   try {
     await connectDatabase();
