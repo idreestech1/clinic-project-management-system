@@ -1,16 +1,16 @@
-import dotenv from 'dotenv';
-dotenv.config();
+import "dotenv/config";
 import app from "./app.js";
 import { connectDatabase } from "./config/database.js";
 import { seedDatabase } from "./config/seed.js";
 
-const port = Number(process.env.PORT) || 5000;
+const port = Number(process.env.PORT) || 5001;
 const host = process.env.HOST || "0.0.0.0";
-
 
 const startServer = async () => {
   try {
+    console.log("Initializing database connection...");
     await connectDatabase();
+
     try {
       await seedDatabase();
     } catch (seedErr) {

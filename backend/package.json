@@ -4,9 +4,9 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
-    "dev": "nodemon src/server.js",
-    "start": "node src/server.js",
-    "serve": "node src/server.js"
+    "dev": "nodemon --env-file=.env src/server.js",
+    "start": "node --env-file=.env src/server.js",
+    "serve": "node --env-file=.env src/server.js"
   },
   "engines": {
     "node": ">=20"
@@ -14,7 +14,7 @@
   "dependencies": {
     "cors": "^2.8.5",
     "doctor-project": "file:..",
-    "dotenv": "^17.2.3",
+    "dotenv": "^17.4.2",
     "express": "^5.2.1",
     "mongoose": "^9.6.1"
   },

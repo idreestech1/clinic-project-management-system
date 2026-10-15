@@ -1,55 +1,66 @@
+import "dotenv/config";
 import mongoose from "mongoose";
 
-// Disable mongoose command buffering so queries fail fast if not connected
-mongoose.set("bufferCommands", false);
 mongoose.set("strictQuery", true);
 
-const mongoUri = process.env.MONGODB_URI;
-if (!mongoUri) {
-  throw new Error("MONGODB_URI is missing. Add it to backend/.env or your deployment environment.");
-}
-
 const connectOptions = {
-  serverSelectionTimeoutMS: 30000,
+  dbName: process.env.MONGODB_DB || "doctor-clinic",
+  serverSelectionTimeoutMS: 10000,
   socketTimeoutMS: 45000,
   family: 4,
 };
 
 const globalWithMongoose = globalThis;
 if (!globalWithMongoose.__mongoose) {
-  globalWithMongoose.__mongoose = { conn: null, promise: null };
+  globalWithMongoose.__mongoose = { conn: null, promise: null, listenersAttached: false };
 }
 
 export const connectDatabase = async () => {
-  if (globalWithMongoose.__mongoose.conn) {
-    return globalWithMongoose.__mongoose.conn;
+  // If already connected, return existing connection
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
   }
 
-  if (!globalWithMongoose.__mongoose.promise) {
-    globalWithMongoose.__mongoose.promise = mongoose
-      .connect(mongoUri, connectOptions)
-      .then(() => {
-        globalWithMongoose.__mongoose.conn = mongoose.connection;
-        return globalWithMongoose.__mongoose.conn;
-      })
-      .catch((err) => {
-        globalWithMongoose.__mongoose.promise = null;
-        throw err;
-      });
+  const mongoUri = process.env.MONGODB_URI;
+  if (!mongoUri) {
+    throw new Error(
+      "MONGODB_URI is missing. Add it to backend/.env or your deployment environment variables."
+    );
   }
+
+  // If a connection attempt is currently in progress, await it
+  if (globalWithMongoose.__mongoose.promise) {
+    await globalWithMongoose.__mongoose.promise;
+    return mongoose.connection;
+  }
+
+  // Attach connection lifecycle events once
+  if (!globalWithMongoose.__mongoose.listenersAttached) {
+    mongoose.connection.on("error", (err) => {
+      console.error("MongoDB connection error:", err.message || err);
+    });
+    mongoose.connection.on("disconnected", () => {
+      console.warn("MongoDB disconnected");
+      globalWithMongoose.__mongoose.promise = null;
+    });
+    mongoose.connection.once("open", () => {
+      console.info(`MongoDB connection established to "${mongoose.connection.name}"`);
+    });
+    globalWithMongoose.__mongoose.listenersAttached = true;
+  }
+
+  globalWithMongoose.__mongoose.promise = mongoose
+    .connect(mongoUri, connectOptions)
+    .then((m) => {
+      globalWithMongoose.__mongoose.conn = m.connection;
+      return m.connection;
+    })
+    .catch((err) => {
+      globalWithMongoose.__mongoose.promise = null;
+      globalWithMongoose.__mongoose.conn = null;
+      throw err;
+    });
 
   const connection = await globalWithMongoose.__mongoose.promise;
-
-  connection.on("error", (err) => {
-    console.error("MongoDB connection error:", err);
-  });
-  connection.on("disconnected", () => {
-    console.warn("MongoDB disconnected");
-  });
-  connection.once("open", () => {
-    console.info("MongoDB connection is open");
-  });
-
-  console.log("MongoDB connected");
   return connection;
 };

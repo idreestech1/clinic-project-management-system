@@ -1,5 +1,7 @@
+import "dotenv/config";
 import cors from "cors";
 import express from "express";
+import mongoose from "mongoose";
 import appointmentsRouter from "./routes/appointments.routes.js";
 import authRouter from "./routes/auth.routes.js";
 import contactRouter from "./routes/contact.routes.js";
@@ -11,43 +13,49 @@ import reviewsRouter from "./routes/reviews.routes.js";
 import servicesRouter from "./routes/services.routes.js";
 import settingsRouter from "./routes/settings.routes.js";
 import slotsRouter from "./routes/slots.routes.js";
+import { connectDatabase } from "./config/database.js";
 import { errorHandler } from "./middleware/errorHandler.js";
 
 const app = express();
 
-const configuredOrigins = [
-  process.env.CLIENT_ORIGIN,
-  process.env.FRONTEND_URL,
-  process.env.FRONTEND_ORIGIN,
-  process.env.VERCEL_URL ? `https://${process.env.VERCEL_URL}` : "",
-  "http://localhost:5173",
-  "http://127.0.0.1:5173",
-  "http://localhost:3000",
-  "http://127.0.0.1:3000",
-]
-  .join(",")
-  .split(",")
-  .map((origin) => origin.trim())
-  .filter(Boolean);
-
-const isLoopbackOrigin = (origin) => {
-  try {
-    const { hostname } = new URL(origin);
-    return ["localhost", "127.0.0.1", "::1"].includes(hostname);
-  } catch {
-    return false;
-  }
-};
-
-app.use(cors())
-
+app.use(
+  cors({
+    origin: true,
+    credentials: true,
+    methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 
 app.use(express.json());
 
+// Database connection wrapper middleware: ensures MongoDB is connected before handling queries
+app.use(async (req, res, next) => {
+  // Allow health check to respond immediately without blocking
+  if (req.path === "/api/health") {
+    return next();
+  }
+
+  try {
+    await connectDatabase();
+    next();
+  } catch (err) {
+    console.error("Database connection failed in request wrapper:", err.message);
+    return res.status(503).json({
+      ok: false,
+      message: "Database connection failed or timed out. Please verify MongoDB status.",
+      error: err.message,
+    });
+  }
+});
+
 app.get("/api/health", (_req, res) => {
+  const isConnected = mongoose.connection.readyState === 1;
   res.json({
     ok: true,
     service: "doctor-backend",
+    database: isConnected ? "connected" : "disconnected",
+    databaseName: mongoose.connection.name || null,
     timestamp: new Date().toISOString(),
   });
 });
@@ -69,5 +77,11 @@ app.use((_req, res) => {
 });
 
 app.use(errorHandler);
+
+// Serverless handler wrapper (supports Vercel, serverless, or microservice environments)
+export const handler = async (req, res) => {
+  await connectDatabase();
+  return app(req, res);
+};
 
 export default app;
